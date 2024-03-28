@@ -46,12 +46,13 @@ class User:
         sql = "SELECT id FROM user WHERE name = ? AND password = ?;"
         CURSOR.execute(sql, (name, hashed_password))
         user = CURSOR.fetchone()
+        os.system('cls' if os.name == 'nt' else 'clear')
+
         if user:
-            os.system('clear')
             print("Welcome Back!")
             return True, user[0]  # Return True and user_id
         else:
-            print("Authentication failed: Invalid username or password.")
+            print("Authentication failed: Invalid username or password. Try again dummy.")
             return False, None  # Return False and None for user_id
 
     @classmethod

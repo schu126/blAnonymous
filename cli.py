@@ -12,8 +12,8 @@ def initialize_app():
 
 def main_menu():
     print("\nWelcome to blAnonymous")
-    print("1. Log In\n2. Register\n3. Exit")
-    choice = input("Choose an option: ")
+    print("\n1. Log In\n2. Register\n3. Exit")
+    choice = input("\nChoose an option: ")
     if choice == "1":
         login()
     elif choice == "2":
@@ -32,15 +32,24 @@ def login():
         session['user_id'] = user_id  # Store user_id in session
         user_dashboard()
     else:
-        print("Login failed. Please try again.")
         main_menu()
 
 def register():
-    username = input("Enter new username: ")
-    password = input("Enter new password: ")
-    User.register(username, password)
-    print("Registration successful. Please log in.")
-    main_menu()
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        
+        username = input("Enter new username: ")
+        password = input("Enter new password: ")
+        success = User.register(username, password)
+        if success:
+            print("Registration successful. Please log in.")
+            main_menu()
+        else:
+            print("Username already exists, you're late to the game buddy. Be more original.")
+            try_again = input("Try again? (y/n): ").lower()
+            if try_again != 'y':
+                os.system('cls' if os.name == 'nt' else 'clear')
+                main_menu()
 
 def user_dashboard():
     while True:
