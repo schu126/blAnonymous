@@ -75,20 +75,26 @@ def view_individual_post(post_id):
         print("1. Like\n2. Dislike\n3. Go Back")
         action = input("Choose an option: ")
         if action == "1":
-            # add a method called "like_post"
+            Posts.like_post(post_id)
             print("Post liked.")
         elif action == "2":
-            # add a method called "dislike_post" 
+            Posts.dislike_post(post_id)
             print("Post disliked.")
         elif action == "3":
             view_posts()
         else:
             print("Invalid choice.")
-            view_individual_post(post_id)
-    else:
+        
+        print(f"Updated - Likes: {post.likes}, Dislikes: {post.dislikes}")
+        view_individual_post(post_id)
+        post = Posts.find_by_id(post_id)
+
+    else: 
         print("Post not found.")
         view_posts()
+       
 
+    
 def create_post():
     
     title = input("Enter post title: ")
