@@ -81,7 +81,7 @@ def view_posts():
     else:
         for post in posts:
             print(f"{post.id}: {post.title} - {post.publication_date}")
-        post_id = input("Enter post ID to view details, or 'b' to go back: ")
+        post_id = input("\nEnter post ID to view details, or 'b' to go back: ")
         if post_id.lower() == 'b':
             os.system('cls' if os.name == 'nt' else 'clear')
             user_dashboard()
@@ -121,22 +121,29 @@ def view_individual_post(post_id):
 
     
 def create_post():
+    os.system('cls' if os.name == 'nt' else 'clear')
     
     title = input("Enter post title: ")
     content = input("Enter post content: ")
     publication_date = input("Enter publication date (MM-DD-YYYY): ")
 
-    # validate the publication date format
     try:
+        # Validate the publication date format and ensure title/content are not empty
         datetime.datetime.strptime(publication_date, "%m-%d-%Y")
-        # Use the session's user_id as author_id
-        author_id = session['user_id']
-        Posts.create(title, content, publication_date, author_id)
-        print("Post created successfully.")
+        if title.strip() and content.strip(): 
+            success = Posts.create(title, content, publication_date, session['user_id'])
+            if success:
+                print("Post created successfully. Now people can read your stuff.")
+            else:
+                print("Post creation failed. There might have been an issue saving to the database.")
+        else:
+            print("Title and content cannot be empty.")
     except ValueError:
         print("Invalid date format. Please use MM-DD-YYYY.")
-    
-    user_dashboard()
+
+    input("Press to see existing posts.")  # Give the user a chance to read the message before proceeding
+    view_posts()  # Show the list of posts
+
 
 
 
