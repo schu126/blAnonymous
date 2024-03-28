@@ -1,6 +1,7 @@
 from __init__ import CURSOR, CONN
 from User import User
 from Posts import Posts
+import os
 import datetime
 
 session = {'user_id': None}
@@ -10,7 +11,7 @@ def initialize_app():
     Posts.create_table()
 
 def main_menu():
-    print("Welcome to blAnonymous Blog Center")
+    print("\nWelcome to blAnonymous")
     print("1. Log In\n2. Register\n3. Exit")
     choice = input("Choose an option: ")
     if choice == "1":
@@ -42,20 +43,28 @@ def register():
     main_menu()
 
 def user_dashboard():
-    print("User Dashboard")
-    print("1. View Posts\n2. Create Post\n3. Logout")
-    choice = input("Choose an option: ")
-    if choice == "1":
-        view_posts()
-    elif choice == "2":
-        create_post()
-    elif choice == "3":
-        main_menu()
-    else:
-        print("Invalid choice. Please try again.")
-        user_dashboard()
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+        print("User Dashboard")
+        print("1. View Posts\n2. Create Post\n3. Logout")
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            view_posts()
+        elif choice == "2":
+            create_post()
+        elif choice == "3":
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("You have successfully logged out.")
+            main_menu()
+        else:
+            print("Invalid choice. Please try again.")
+            user_dashboard()
 
 def view_posts():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
     posts = Posts.get_all()
     if not posts:
         print("No posts available.")
@@ -64,35 +73,41 @@ def view_posts():
             print(f"{post.id}: {post.title} - {post.publication_date}")
         post_id = input("Enter post ID to view details, or 'b' to go back: ")
         if post_id.lower() == 'b':
+            os.system('cls' if os.name == 'nt' else 'clear')
             user_dashboard()
         else:
             view_individual_post(int(post_id))
 
 def view_individual_post(post_id):
-    post = Posts.find_by_id(post_id)
-    if post:
-        print(f"Title: {post.title}\nContent: {post.content}\nDate: {post.publication_date}\nLikes: {post.likes}, Dislikes: {post.dislikes}")
-        print("1. Like\n2. Dislike\n3. Go Back")
-        action = input("Choose an option: ")
-        if action == "1":
-            Posts.like_post(post_id)
-            print("Post liked.")
-        elif action == "2":
-            Posts.dislike_post(post_id)
-            print("Post disliked.")
-        elif action == "3":
-            view_posts()
-        else:
-            print("Invalid choice.")
-        
-        print(f"Updated - Likes: {post.likes}, Dislikes: {post.dislikes}")
-        view_individual_post(post_id)
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
         post = Posts.find_by_id(post_id)
 
-    else: 
-        print("Post not found.")
-        view_posts()
-       
+        if post:
+            print(f"Title: {post.title}\nContent: {post.content}\nDate: {post.publication_date}\nLikes: {post.likes}, Dislikes: {post.dislikes}")
+            print("1. Like\n2. Dislike\n3. Go Back")
+            action = input("Choose an option: ")
+
+            if action == "1":
+                Posts.like_post(post_id)
+                print("Post liked.")
+            elif action == "2":
+                Posts.dislike_post(post_id)
+                print("Post disliked.")
+            elif action == "3":
+                # os.system('cls' if os.name == 'nt' else 'clear')
+                view_posts()
+            else:
+                print("\nInvalid choice. Please select a valid option")
+            
+            # print(f"Updated - Likes: {post.likes}, Dislikes: {post.dislikes}")
+            view_individual_post(post_id)
+            post = Posts.find_by_id(post_id)
+
+        else: 
+            print("Post not found.")
+            view_posts()
+        
 
     
 def create_post():

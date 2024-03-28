@@ -1,4 +1,5 @@
 import sqlite3
+import os
 from hashlib import sha256
 
 CONN = sqlite3.connect('database.db')
@@ -46,6 +47,7 @@ class User:
         CURSOR.execute(sql, (name, hashed_password))
         user = CURSOR.fetchone()
         if user:
+            os.system('clear')
             print("Welcome Back!")
             return True, user[0]  # Return True and user_id
         else:

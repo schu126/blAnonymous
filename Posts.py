@@ -1,5 +1,6 @@
 from __init__ import CURSOR, CONN
 from User import User
+import os
 import sqlite3
 
 class Posts:
