@@ -145,7 +145,7 @@ def create_post():
     except ValueError:
         print("Invalid date format. Please use MM-DD-YYYY.")
 
-    input("Press to see existing posts.")  # Give the user a chance to read the message before proceeding
+    input("Press enter to see existing posts.")  # Give the user a chance to read the message before proceeding
     view_posts()  # Show the list of posts
 
 
