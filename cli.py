@@ -42,6 +42,7 @@ def register():
         password = input("Enter new password: ")
         success = User.register(username, password)
         if success:
+            os.system('cls' if os.name == 'nt' else 'clear')
             print("Registration successful. Please log in.")
             main_menu()
         else:
@@ -56,8 +57,8 @@ def user_dashboard():
         os.system('cls' if os.name == 'nt' else 'clear')
 
         print("User Dashboard")
-        print("1. View Posts\n2. Create Post\n3. Logout")
-        choice = input("Choose an option: ")
+        print("\n1. View Posts\n2. Create Post\n3. Logout")
+        choice = input("\nChoose an option: ")
 
         if choice == "1":
             view_posts()
