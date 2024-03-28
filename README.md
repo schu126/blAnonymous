@@ -2,7 +2,7 @@
 # blAnonymous: Anonymous Blogging Platform
 
 ## Description
-### Welcome to blAnonymous, a Command Line Interface (CLI) application designed for those who love to write and share thoughts anonymously. With blAnonymous, you can create, view, and manage blog posts with complete anonymity. Whether you're looking to share your insights, stories, or any thoughts that cross your mind, blAnonymous provides a simple yet powerful platform to express yourself without revealing your identity.
+#### Welcome to blAnonymous, a Command Line Interface (CLI) application designed for those who love to write and share thoughts anonymously. With blAnonymous, you can create, view, and manage blog posts with complete anonymity. Whether you're looking to share your insights, stories, or any thoughts that cross your mind, blAnonymous provides a simple yet powerful platform to express yourself without revealing your identity.
 
 
 ## Features
