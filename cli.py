@@ -21,6 +21,8 @@ def main_menu():
     elif choice == "3":
         exit()
     else:
+        os.system('cls' if os.name == 'nt' else 'clear')
+
         print("Invalid choice. Please try again.")
         main_menu()
 
@@ -95,8 +97,8 @@ def view_individual_post(post_id):
 
         if post:
             print(f"Title: {post.title}\nContent: {post.content}\nDate: {post.publication_date}\nLikes: {post.likes}, Dislikes: {post.dislikes}")
-            print("1. Like\n2. Dislike\n3. Go Back")
-            action = input("Choose an option: ")
+            print("\n1. Like\n2. Dislike\n3. Go Back")
+            action = input("\nChoose an option: ")
 
             if action == "1":
                 Posts.like_post(post_id)
@@ -108,6 +110,8 @@ def view_individual_post(post_id):
                 # os.system('cls' if os.name == 'nt' else 'clear')
                 view_posts()
             else:
+                os.system('cls' if os.name == 'nt' else 'clear')
+
                 print("\nInvalid choice. Please select a valid option")
             
             # print(f"Updated - Likes: {post.likes}, Dislikes: {post.dislikes}")
